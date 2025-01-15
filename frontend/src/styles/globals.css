@@ -1,0 +1,14 @@
+/* Importing Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Inter:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif; /* Default font-family */
+}
+
+/* Optionally, if you want to use 'Inter' font for specific areas, 
+   you can set 'Inter' for them here. */
