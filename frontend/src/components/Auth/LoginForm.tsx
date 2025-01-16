@@ -92,7 +92,7 @@ const LoginForm: React.FC = () => {
                 <Button
                     type="button"
                     variant="outline"
-                    className="border border-neutral-600 hover:border-neutral-900"
+                    className="border border-neutral-900 hover:bg-neutral-900"
                     onClick={() => navigate('/signup')} // Navigate to Signup page
                 >
                     Register
