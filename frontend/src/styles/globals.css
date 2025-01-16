@@ -10,5 +10,12 @@ body {
   font-family: "Roboto", sans-serif; /* Default font-family */
 }
 
+* {
+  cursor: default;
+}
+
+Input {
+  cursor: text !important;
+}
 /* Optionally, if you want to use 'Inter' font for specific areas, 
    you can set 'Inter' for them here. */

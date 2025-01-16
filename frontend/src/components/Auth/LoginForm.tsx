@@ -1,38 +1,50 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input } from '@/components/ui/input';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 import { Button } from '../ui/button';
+import { toast } from 'react-toastify';
+import { Icon } from '@iconify/react';
 
 const LoginForm: React.FC = () => {
     const navigate = useNavigate();
-
-    // States for form inputs and error messages
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [rememberMe, setRememberMe] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
     const [showForgotPassword, setShowForgotPassword] = useState<boolean>(false);
+    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(prevState => !prevState);
+    };
+
+    const handleForgotPassword = () => {
+        navigate('/reset-password');
+    }
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Mock email and password check
+        if (!email || !password) {
+            toast.error('Please fill in both email and password');
+            return;
+        }
+
         const mockEmail = 'user@mail.com';
         const mockPassword = '123456';
 
         if (email !== mockEmail) {
-            setError('No user found with that email');
-            setShowForgotPassword(false); // Hide forgot password if email doesn't exist
+            toast.error('No user found with that email');
+            setShowForgotPassword(false);
             return;
         }
 
         if (password !== mockPassword) {
-            setError('Incorrect password');
-            setShowForgotPassword(true); // Show Forgot Password link if password is wrong
+            toast.error('Incorrect password');
+            setShowForgotPassword(true);
             return;
         }
 
-        // Mock login success
         localStorage.setItem('authToken', 'sample-token');
         navigate('/chat');
     };
@@ -41,68 +53,74 @@ const LoginForm: React.FC = () => {
         <form onSubmit={handleLogin} className="bg-white p-8 rounded-3xl border-2 border-neutral-500 w-96">
             <h2 className="text-xl font-bold mb-4">Login</h2>
 
-            {/* Email Input */}
-            <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border border-neutral-400 w-full p-2 mb-4"
-            />
-
-            {/* Password Input */}
-            <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border border-neutral-400 w-full p-2 mb-4"
-            />
-
-            {/* Remember Me Checkbox */}
-            <div className="flex items-center mb-4">
-                <input
-                    type="checkbox"
-                    id="remember"
-                    className="mr-2"
-                    checked={rememberMe}
-                    onChange={() => setRememberMe(!rememberMe)}
+            <div className='flex flex-col gap-4'>
+                <Input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="border border-neutral-400 w-full p-2"
                 />
-                <label htmlFor="remember">Remember Me</label>
-            </div>
 
-            {/* Error Message */}
-            {error && <p className="text-red-500 mb-4">{error}</p>}
+                <div className="relative">
+                    <Input
+                        type={isPasswordVisible ? 'text' : 'password'}
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="border border-neutral-400 w-full p-2"
+                    />
 
-            {/* Forgot Password link */}
-            {showForgotPassword && (
-                <div className="mb-4">
-                    <button
-                        type="button"
-                        onClick={() => alert('Redirect to password reset page')}
-                        className="text-sm text-blue-500 hover:underline"
+                    <div
+                        className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"
+                        onClick={togglePasswordVisibility}
                     >
-                        Forgot Password?
-                    </button>
+                        <Icon icon={isPasswordVisible ? "ph:eye-duotone" : "ph:eye-slash-duotone"} width={20} height={20} />
+                    </div>
                 </div>
-            )}
 
-            {/* Form Actions */}
-            <div className="flex gap-4 justify-between">
-                <Button
-                    type="button"
-                    variant="outline"
-                    className="border border-neutral-900 hover:bg-neutral-900"
-                    onClick={() => navigate('/signup')} // Navigate to Signup page
-                >
-                    Register
-                </Button>
-                <Button
-                    type="submit"
-                    variant="default"
-                >
-                    Login
-                </Button>
+                <div className='flex gap-3 items-center justify-between'>
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            id="remember"
+                            className="!cursor-pointer"
+                            checked={rememberMe}
+                            onChange={() => setRememberMe(!rememberMe)}
+                        />
+                        <Label className="text-xs hover:cursor-pointer" htmlFor="remember">Remember Me</Label>
+                    </div>
+
+                    {showForgotPassword && (
+                        <div className="mb-4">
+                            <button
+                                type="button"
+                                onClick={handleForgotPassword}
+                                className="text-xs text-blue-500 hover:underline"
+                            >
+                                Forgot Password?
+                            </button>
+                        </div>
+                    )}
+                </div>
+
+                <div className="flex gap-4 justify-between">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        className="border border-neutral-900 hover:bg-neutral-900 w-full"
+                        onClick={() => navigate('/signup')}
+                    >
+                        Register
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="default"
+                        className="w-full"
+                    >
+                        Login
+                    </Button>
+                </div>
             </div>
         </form>
     );
