@@ -1,20 +1,25 @@
 import React from 'react';
 import Sidebar from '../components/Chat/Sidebar';
+import ChatWindow from '../components/Chat/ChatWindow';
+import RightAside from '../components/Chat/RightAside';
 
-interface MainChatLayoutProps {
-    children: React.ReactNode;
-}
-
-const MainChatLayout: React.FC<MainChatLayoutProps> = ({ children }) => {
+const MainChatLayout: React.FC = () => {
     return (
         <div className="flex h-screen">
-            {/* Sidebar Section */}
+            {/* Sidebar */}
             <div className="w-64">
                 <Sidebar />
             </div>
 
-            {/* Main Chat Section */}
-            <div className="flex-1 bg-gray-50 overflow-y-auto">{children}</div>
+            {/* Chat Window */}
+            <div className="flex-1 bg-neutral-900 p-2">
+                <ChatWindow />
+            </div>
+
+            {/* Right Aside */}
+            <div className="w-80">
+                <RightAside />
+            </div>
         </div>
     );
 };

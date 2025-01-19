@@ -1,14 +1,8 @@
 import React from 'react';
-import Sidebar from '../components/Chat/Sidebar';
-import ChatWindow from '../components/Chat/ChatWindow';
+import MainChatLayout from '../layouts/MainChatLayout';
 
 const ChatPage: React.FC = () => {
-    return (
-        <div className="flex h-screen">
-            <Sidebar />
-            <ChatWindow />
-        </div>
-    );
+    return <MainChatLayout />;
 };
 
 export default ChatPage;

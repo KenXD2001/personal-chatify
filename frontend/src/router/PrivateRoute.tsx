@@ -10,7 +10,7 @@ const isAuthenticated = (): boolean => {
 const PrivateRoute: React.FC = () => {
     const token = localStorage.getItem('authToken');
     console.log(token);
-    return isAuthenticated() ? <Outlet /> : <Navigate to="/" />;
+    return isAuthenticated() ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

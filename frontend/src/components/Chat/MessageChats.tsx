@@ -1,31 +1,39 @@
+// src/components/Chat/MessageChats.tsx
+
 import React from 'react';
 
-const messages = [
-    { id: 1, sender: 'You', text: 'Hi, how are you?', timestamp: '10:00 AM' },
-    { id: 2, sender: 'Friend', text: 'I’m good, thanks!', timestamp: '10:02 AM' },
-    { id: 3, sender: 'You', text: 'What’s up?', timestamp: '10:05 AM' },
-];
+interface MessageChatsProps {
+    filter: string;
+}
 
-const MessageChats: React.FC = () => {
+const MessageChats: React.FC<MessageChatsProps> = ({ filter }) => {
+    const messages = [
+        { id: 1, sender: 'Alice', lastMessage: 'Hi!', unread: 2 },
+        { id: 2, sender: 'Bob', lastMessage: 'Let’s catch up.', unread: 0 },
+        { id: 3, sender: 'Charlie', lastMessage: 'See you soon.', unread: 1 },
+    ];
+
+    const filteredMessages = messages.filter((chat) =>
+        chat.sender.toLowerCase().includes(filter)
+    );
+
     return (
-        <div className="space-y-4">
-            {messages.map((message) => (
-                <div
-                    key={message.id}
-                    className={`flex ${message.sender === 'You' ? 'justify-end' : 'justify-start'
-                        }`}
-                >
-                    <div
-                        className={`p-3 rounded-lg ${message.sender === 'You'
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-200 text-black'
-                            }`}
+        <div className="p-4">
+            <ul>
+                {filteredMessages.map((chat) => (
+                    <li
+                        key={chat.id}
+                        className="flex justify-between items-center p-2 rounded hover:bg-gray-100 cursor-pointer"
                     >
-                        <p>{message.text}</p>
-                        <span className="text-xs text-gray-500">{message.timestamp}</span>
-                    </div>
-                </div>
-            ))}
+                        <span>{chat.sender}</span>
+                        {chat.unread > 0 && (
+                            <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                                {chat.unread}
+                            </span>
+                        )}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

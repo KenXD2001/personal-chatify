@@ -17,5 +17,11 @@ body {
 Input {
   cursor: text !important;
 }
+
+@layer components {
+  .scroll-area {
+    @apply overflow-auto;
+  }
+}
 /* Optionally, if you want to use 'Inter' font for specific areas, 
    you can set 'Inter' for them here. */

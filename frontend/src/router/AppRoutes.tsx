@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
@@ -11,6 +11,9 @@ import PrivateRoute from './PrivateRoute';
 const AppRoutes: React.FC = () => {
     return (
         <Routes>
+            {/* Redirect root to /login */}
+            <Route path="/" element={<Navigate to="/login" />} />
+
             {/* Public Routes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
