@@ -30,7 +30,7 @@ const LoginForm: React.FC = () => {
             return;
         }
 
-        const mockEmail = 'user@mail.com';
+        const mockEmail = 'ashwin@gmail.com';
         const mockPassword = '123456';
 
         if (email !== mockEmail) {

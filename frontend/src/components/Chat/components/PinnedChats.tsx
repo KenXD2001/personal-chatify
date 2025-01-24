@@ -106,7 +106,7 @@ const PinnedChats = () => {
                             {/* Middle: Username & Message */}
                             <div className="flex-1">
                                 <div className="text-sm font-semibold">{chat.username}</div>
-                                <div className="text-sm text-neutral-400 line-clamp-1">{chat.message}</div>
+                                <div className="text-xs text-neutral-400 line-clamp-1">{chat.message}</div>
                             </div>
 
                             {/* Right: Time & Message Status */}

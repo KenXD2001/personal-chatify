@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '../ui/button';
-import { ScrollArea } from '../ui/scroll-area';
 
-const Sidebar: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<'messages' | 'groups' | null>(null);
+interface SidebarProps {
+    activeTab: 'messages' | 'groups' | null;
+    setActiveTab: (tab: 'messages' | 'groups') => void;
+}
 
-    const toggleTab = (tab: 'messages' | 'groups') => {
-        setActiveTab((prev) => (prev === tab ? null : tab));
-    };
-
+const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
     return (
         <div className="flex flex-col w-64 h-full bg-neutral-900 text-white">
             {/* Header */}
@@ -27,7 +25,7 @@ const Sidebar: React.FC = () => {
                 {/* Messages Button */}
                 <div
                     className={`p-2 cursor-pointer rounded-lg ${activeTab === 'messages' ? 'bg-blue-600' : 'bg-neutral-800'}`}
-                    onClick={() => toggleTab('messages')}
+                    onClick={() => setActiveTab('messages')}
                 >
                     Messages
                 </div>
@@ -35,7 +33,7 @@ const Sidebar: React.FC = () => {
                 {/* Group Messages Button */}
                 <div
                     className={`p-2 cursor-pointer rounded-lg ${activeTab === 'groups' ? 'bg-green-600' : 'bg-neutral-800'}`}
-                    onClick={() => toggleTab('groups')}
+                    onClick={() => setActiveTab('groups')}
                 >
                     Group Messages
                 </div>

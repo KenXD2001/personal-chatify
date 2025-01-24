@@ -13,10 +13,14 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
             </div>
 
             {/* Right Section */}
-            <div
-                className="w-1/2 bg-cover bg-center bg-red"
-                style={{ backgroundImage: `url('/src/assets/auth-bg.jpg')` }}
-            ></div>
+            <div className="w-1/2 bg-red flex items-center justify-center">
+                <img
+                    src="/src/assets/auth-bg.svg"
+                    alt="Auth Background"
+                    className="w-3/4 h-auto object-contain"
+                    style={{ maxHeight: '100%' }}
+                />
+            </div>
         </div>
     );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from '../ui/button';
 import { Icon } from '@iconify/react';
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-const ChatWindow: React.FC = () => {
+const MessagesLayout: React.FC = () => {
+
     const [searchTerm, setSearchTerm] = useState('');
     const [isPinned, setIsPinned] = useState(false);
 
@@ -165,4 +165,4 @@ const ChatWindow: React.FC = () => {
     );
 };
 
-export default ChatWindow;
+export default MessagesLayout;
